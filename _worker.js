@@ -6,13 +6,18 @@ export default {
         // 如果环境变量中有 TOKEN，则将其赋值给 mytoken，否则保持默认值
         mytoken = env.TOKEN || mytoken;
 
-        // 将 env.KV 赋值一个名为 KV 的常量
-        const KV =  env.KV;
-
+		let KV;
         // 检查 KV (键值存储) 是否已经被设置
-        if (!KV) {
-            throw new Error('KV 命名空间未绑定');
-        }
+        if (env.KV) {
+			// 将 env.KV 赋值一个名为 KV 的常量
+			KV =  env.KV;
+        } else {
+			//throw new Error('KV 命名空间未绑定');
+			return new Response('KV 命名空间未绑定', {
+                status: 400,
+                headers: { 'content-type': 'text/plain; charset=utf-8' },
+            });
+		}
 
         // 从请求的 URL 中获取需要的参数
         const url = new URL(request.url);
