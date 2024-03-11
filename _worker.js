@@ -51,7 +51,7 @@ export default {
 						headers: { 'content-type': 'text/plain; charset=utf-8' },
 					});
 				} else if (text === "null" ){
-					await KV.put(文件名, b64);
+					await KV.put(文件名, base64Decode(b64));
 					return new Response(base64Decode(b64), {
 						status: 200,
 						headers: { 'content-type': 'text/plain; charset=utf-8' },
