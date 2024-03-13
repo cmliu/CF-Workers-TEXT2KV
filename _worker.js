@@ -1,4 +1,4 @@
-// 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限
+// 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限1
 let mytoken= 'passwd';
 
 export default {
@@ -44,6 +44,13 @@ export default {
 				return new Response(下载bat(url.hostname, token), {
 				  headers: {
 					"Content-Disposition": `attachment; filename=update.bat`, 
+					"content-type": "text/plain; charset=utf-8",
+				  },
+				});
+			} else if (文件名 == "/config/update.sh") {
+				return new Response(下载sh(url.hostname, token), {
+				  headers: {
+					"Content-Disposition": `attachment; filename=update.sh`, 
 					"content-type": "text/plain; charset=utf-8",
 				  },
 				});
@@ -140,21 +147,42 @@ function 下载bat(域名,token) {
 	].join('\r\n');
 }
 
+function 下载sh(域名,token) {
+	return `#!/bin/bash
+export LANG=zh_CN.UTF-8
+DOMAIN="${域名}"
+TOKEN="${token}"
+if [ -n "$1" ]; then 
+  FILENAME="$1"
+else
+  echo "无文件名"
+  exit 1
+fi
+BASE64_TEXT=$(base64 -w 0 $FILENAME)
+curl -k "https://$DOMAIN/$FILENAME?token=$TOKEN&b64=$BASE64_TEXT"
+echo "更新数据完成"
+`
+}
+
 function configHTML(域名, token) {
 	return `
 	  <html>
 		<head>
 		  <title>CF-Workers-TEXT2KV</title>
 		</head>
-
 		<body>
 		  <h1 class="centered">CF-Workers-TEXT2KV 配置信息</h1>
 		  <p class="centered">
 		  服务域名: ${域名} <br>
 		  token: ${token} <br>
 		  <br>
-		  Windows: <a href="https://${域名}/config/update.bat?token=${token}">Update.bat 下载</a><br>
-		  Linux: Update.sh 下载<br>
+		  Windows脚本: <button type="button" onclick="window.open('https://${域名}/config/update.bat?token=${token}', '_blank')">点击下载</button>
+		  <br>
+		  <pre>使用方法: <code>&lt;update.bat&nbsp;ip.txt&gt;</code></pre>
+		  <br>
+		  Linux脚本: 
+		  <code>&lt;curl&nbsp;https://${域名}/config/update.sh?token=${token}&nbsp;-o&nbsp;update.sh&nbsp;&&&nbsp;chmod&nbsp;+x&nbsp;update.sh&gt;</code><br>
+		  <pre>使用方法: <code>&lt;./update.sh&nbsp;ip.txt&gt;</code></pre><br>
 		  <br>
 		  在线文档查询: <br>
 		  https://${域名}/<input type="text" name="keyword" placeholder="请输入要查询的文档">?token=${token}    
