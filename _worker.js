@@ -163,7 +163,7 @@ curl -k "https://$DOMAIN/$FILENAME?token=$TOKEN&b64=$BASE64_TEXT"
 echo "更新数据完成"
 `
 }
-``
+
 function configHTML(域名, token) {
 	return `
 	  <html>
