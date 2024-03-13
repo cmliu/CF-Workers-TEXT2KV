@@ -44,7 +44,7 @@ export default {
 				return new Response(下载bat(url.hostname, token), {
 				  headers: {
 					"Content-Disposition": `attachment; filename=update.bat`, 
-					"content-type": "text/html; charset=utf-8",
+					"content-type": "text/plain; charset=utf-8",
 				  },
 				});
 			} else {
@@ -134,11 +134,11 @@ function 下载bat(域名,token) {
 	  ``,
 	  `endlocal`,
 	  ``,
-	  `rem 执行完成后继续保持窗口打开`,
-	  `pause`
+	  `echo 更新数据完成,倒数5秒后自动关闭窗口...`,
+	  `timeout /t 5 >nul`,
+	  `exit`
 	].join('\r\n');
-  }
-  
+}
 
 function configHTML(域名, token) {
 	return `
@@ -153,10 +153,16 @@ function configHTML(域名, token) {
 		  服务域名: ${域名} <br>
 		  token: ${token} <br>
 		  <br>
-		  Windows <a href="https://${域名}/config/update.bat?token=${token}">Update.bat 下载</a><br>
+		  Windows: <a href="https://${域名}/config/update.bat?token=${token}">Update.bat 下载</a><br>
+		  Linux: Update.sh 下载<br>
+		  <br>
+		  在线文档查询: <br>
+		  https://${域名}/<input type="text" name="keyword" placeholder="请输入要查询的文档">?token=${token}    
+		  <button type="button" onclick="window.open('https://${域名}/' + document.querySelector('input[name=keyword]').value + '?token=${token}', '_blank')">查看文档内容</button>
+		  <button type="button" onclick="navigator.clipboard.writeText('https://${域名}/' + document.querySelector('input[name=keyword]').value + '?token=${token}')">复制文档地址</button>
 		  </p>
 	  <br>
 		</body>
 	  </html>
 	`
-  }
+}
