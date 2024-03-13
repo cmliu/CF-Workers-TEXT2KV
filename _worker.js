@@ -1,5 +1,5 @@
 // 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限
-let mytoken= 'passwd';
+let mytoken= 'xvxvxv';
 
 export default {
 	async fetch (request, env) {
@@ -44,7 +44,7 @@ export default {
 				return new Response(下载bat(url.hostname, token), {
 				  headers: {
 					"Content-Disposition": `attachment; filename=update.bat`, 
-					"content-type": "text/plain; charset=utf-8",
+					"content-type": "text/html; charset=utf-8",
 				  },
 				});
 			} else {
@@ -109,36 +109,36 @@ function 空格替换加号(str) {
 }
 
 function 下载bat(域名,token) {
-	return `
-@echo off
-chcp 65001
-setlocal
-
-set "DOMAIN=${域名}"
-set "TOKEN=${token}"
-
-rem %~nx1表示第一个参数的文件名和扩展名
-set "FILENAME=%~nx1"
-
-rem PowerShell command to read the file and base64 encode the content
-for /f "delims=" %%i in ('powershell -command "[convert]::ToBase64String([io.file]::ReadAllBytes('%cd%\%FILENAME%'))"') do set "BASE64_TEXT=%%i"
-
-rem 将内容保存到response.txt
-rem echo %BASE64_TEXT% > response.txt
-
-rem 构造带有文件名和内容作为参数的URL
-set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%&b64=%BASE64_TEXT%"
-
-rem 显示请求的响应 
-powershell -Command "(Invoke-WebRequest -Uri '%URL%').Content"
-
-endlocal
-
-rem 执行完成后继续保持窗口打开
-pause
-
-`;
-}
+	return [
+	  `@echo off`,
+	  `chcp 65001`,
+	  `setlocal`,
+	  ``,
+	  `set "DOMAIN=${域名}"`,
+	  `set "TOKEN=${token}"`,
+	  ``,
+	  `rem %~nx1表示第一个参数的文件名和扩展名`,
+	  `set "FILENAME=%~nx1"`,
+	  ``,
+	  `rem PowerShell command to read the file and base64 encode the content`,
+	  `for /f "delims=" %%i in ('powershell -command "[convert]::ToBase64String([io.file]::ReadAllBytes('%cd%\%FILENAME%'))"') do set "BASE64_TEXT=%%i"`,
+	  ``,
+	  `rem 将内容保存到response.txt`,
+	  `rem echo %BASE64_TEXT% > response.txt`,
+	  ``,
+	  `rem 构造带有文件名和内容作为参数的URL`,
+	  `set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%&b64=%BASE64_TEXT%"`,
+	  ``,
+	  `rem 显示请求的响应 `,
+	  `powershell -Command "(Invoke-WebRequest -Uri '%URL%').Content"`,
+	  ``,
+	  `endlocal`,
+	  ``,
+	  `rem 执行完成后继续保持窗口打开`,
+	  `pause`
+	].join('\r\n');
+  }
+  
 
 function configHTML(域名, token) {
 	return `
