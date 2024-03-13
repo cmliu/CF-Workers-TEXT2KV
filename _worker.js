@@ -128,7 +128,7 @@ function 下载bat(域名,token) {
 	  `set "FILENAME=%~nx1"`,
 	  ``,
 	  `rem PowerShell command to read the file and base64 encode the content`,
-	  `for /f "delims=" %%i in ('powershell -command "[convert]::ToBase64String([io.file]::ReadAllBytes('%cd%\%FILENAME%'))"') do set "BASE64_TEXT=%%i"`,
+	  `for /f "delims=" %%i in ('powershell -command "[convert]::ToBase64String([io.file]::ReadAllBytes('%cd%/%FILENAME%'))"') do set "BASE64_TEXT=%%i"`,
 	  ``,
 	  `rem 将内容保存到response.txt`,
 	  `rem echo %BASE64_TEXT% > response.txt`,
@@ -163,7 +163,7 @@ curl -k "https://$DOMAIN/$FILENAME?token=$TOKEN&b64=$BASE64_TEXT"
 echo "更新数据完成"
 `
 }
-
+``
 function configHTML(域名, token) {
 	return `
 	  <html>
