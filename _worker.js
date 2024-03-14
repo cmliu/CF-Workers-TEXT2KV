@@ -127,8 +127,8 @@ function 下载bat(域名,token) {
 	  `rem %~nx1表示第一个参数的文件名和扩展名`,
 	  `set "FILENAME=%~nx1"`,
 	  ``,
-	  `rem PowerShell command to read the file, convert content to UTF8 and base64 encode the content`,
-	  `for /f "delims=" %%i in ('powershell -command "$content = [io.file]::ReadAllText('%cd%/%FILENAME%', [System.Text.Encoding]::Default); [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))"') do set "BASE64_TEXT=%%i"`,
+	  `rem PowerShell命令读取文件的前65行内容，将内容转换为UTF8并进行base64编码`,
+	  `for /f "delims=" %%i in ('powershell -command "$content = ((Get-Content -Path '%cd%/%FILENAME%' -Encoding Default) | Select-Object -First 65) -join [Environment]::NewLine; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))"') do set "BASE64_TEXT=%%i"`,
 	  ``,
 	  `rem 将内容保存到response.txt`,
 	  `rem echo %BASE64_TEXT% > response.txt`,
@@ -158,7 +158,7 @@ else
   echo "无文件名"
   exit 1
 fi
-BASE64_TEXT=$(base64 -w 0 $FILENAME)
+BASE64_TEXT=$(head -n 65 $FILENAME | base64 -w 0)
 curl -k "https://$DOMAIN/$FILENAME?token=$TOKEN&b64=$BASE64_TEXT"
 echo "更新数据完成"
 `
@@ -176,6 +176,7 @@ function configHTML(域名, token) {
 		  服务域名: ${域名} <br>
 		  token: ${token} <br>
 		  <br>
+		  注意! 因URL长度内容所限，脚本更新方式一次最多更新65行内容<br>
 		  Windows脚本: <button type="button" onclick="window.open('https://${域名}/config/update.bat?token=${token}', '_blank')">点击下载</button>
 		  <br>
 		  <pre>使用方法: <code>&lt;update.bat&nbsp;ip.txt&gt;</code></pre>
