@@ -134,7 +134,7 @@ function 下载bat(域名,token) {
 	  `rem echo %BASE64_TEXT% > response.txt`,
 	  ``,
 	  `rem 构造带有文件名和内容作为参数的URL`,
-	  `set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%&b64=%BASE64_TEXT%"`,
+	  `set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%^&b64=%BASE64_TEXT%"`,
 	  ``,
 	  `rem 显示请求的响应 `,
 	  `rem powershell -Command "(Invoke-WebRequest -Uri '%URL%').Content"`,
