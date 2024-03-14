@@ -1,4 +1,4 @@
-# CF-Workers-TEXT2KV
+# 文本文件储存器 CF-Workers-TEXT2KV
 
 CF-Workers-TEXT2KV 是一个在 Cloudflare Workers 上运行的无服务器应用程序,可以将文本文件存储到 Cloudflare Workers KV 键值存储中,并且可以通过 URL 请求读取或更新这些文本文件。它提供了一个安全的方式来管理和访问您的文本文件,同时利用了 Cloudflare 的全球分布式网络。
 
