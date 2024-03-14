@@ -176,7 +176,7 @@ function configHTML(域名, token) {
 		  服务域名: ${域名} <br>
 		  token: ${token} <br>
 		  <br>
-		  注意! 因URL长度内容所限，脚本更新方式一次最多更新65行内容<br>
+		  <pre>注意! 因URL长度内容所限，脚本更新方式一次最多更新65行内容</pre><br>
 		  Windows脚本: <button type="button" onclick="window.open('https://${域名}/config/update.bat?token=${token}', '_blank')">点击下载</button>
 		  <br>
 		  <pre>使用方法: <code>&lt;update.bat&nbsp;ip.txt&gt;</code></pre>
