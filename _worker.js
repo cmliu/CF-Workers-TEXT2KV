@@ -31,23 +31,23 @@ export default {
 
 		// 检查提供的 token 是否与 mytoken 相符
 		if (token === mytoken) {
-			const 文件名 = url.pathname;
+			const 文件名 = url.pathname.startsWith('/') ? url.pathname.substring(1) : url.pathname;
 
-			if (文件名 == "/config" || 文件名 == `/${mytoken}`) {
+			if (文件名 == "config" || 文件名 == mytoken) {
 				const html = configHTML(url.hostname, token);
 				return new Response(html, {
 				  headers: {
 					'Content-Type': 'text/html; charset=UTF-8',
 				  },
 				});
-			} else if (文件名 == "/config/update.bat") {
+			} else if (文件名 == "config/update.bat") {
 				return new Response(下载bat(url.hostname, token), {
 				  headers: {
 					"Content-Disposition": `attachment; filename=update.bat`, 
 					"content-type": "text/plain; charset=utf-8",
 				  },
 				});
-			} else if (文件名 == "/config/update.sh") {
+			} else if (文件名 == "config/update.sh") {
 				return new Response(下载sh(url.hostname, token), {
 				  headers: {
 					"Content-Disposition": `attachment; filename=update.sh`, 
