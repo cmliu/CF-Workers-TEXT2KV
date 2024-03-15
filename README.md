@@ -11,7 +11,7 @@ CF-Workers-TEXT2KV 是一个在 Cloudflare Workers 上运行的无服务器应�
 - **安全访问控制**: 通过设置 token 参数,可以限制只有拥有正确密钥的请求才能访问您的文件。
 - **辅助工具脚本**: 提供了 Windows 批处理文件和 Linux Shell 脚本,用于方便地从本地上传文件到 KV。
 
-## 使用说明
+## 使用说明 [部署教程](https://youtu.be/crln7SNrEbQ)
 
 1. **部署到 Cloudflare Workers**
 
