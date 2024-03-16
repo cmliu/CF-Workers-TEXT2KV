@@ -147,7 +147,7 @@ function 下载bat(域名,token) {
 	  ``,
 	  `rem 显示请求的响应 `,
 	  `rem powershell -Command "(Invoke-WebRequest -Uri '%URL%').Content"`,
-	  `start microsoft-edge:%URL%`,
+	  `start %URL%`,
 	  `endlocal`,
 	  ``,
 	  `echo 更新数据完成,倒数5秒后自动关闭窗口...`,
