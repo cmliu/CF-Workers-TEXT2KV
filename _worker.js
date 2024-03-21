@@ -1,4 +1,4 @@
-// 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限1
+// 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限
 let mytoken= 'passwd';
 
 export default {
@@ -87,8 +87,40 @@ export default {
 				}
 			}
 
-			// 如果 token 不符，返回 'token 有误'//
-		} else {
+			
+		} else if (url.pathname == "/"){//首页改成一个nginx伪装页
+			return new Response(`
+			<!DOCTYPE html>
+			<html>
+			<head>
+			<title>Welcome to nginx!</title>
+			<style>
+				body {
+					width: 35em;
+					margin: 0 auto;
+					font-family: Tahoma, Verdana, Arial, sans-serif;
+				}
+			</style>
+			</head>
+			<body>
+			<h1>Welcome to nginx!</h1>
+			<p>If you see this page, the nginx web server is successfully installed and
+			working. Further configuration is required.</p>
+			
+			<p>For online documentation and support please refer to
+			<a href="http://nginx.org/">nginx.org</a>.<br/>
+			Commercial support is available at
+			<a href="http://nginx.com/">nginx.com</a>.</p>
+			
+			<p><em>Thank you for using nginx.</em></p>
+			</body>
+			</html>
+			`, {
+			  headers: {
+				'Content-Type': 'text/html; charset=UTF-8',
+			  },
+			});
+		} else {// 如果 token 不符，返回 'token 有误'//
 			return new Response('token 有误', {
 				status: 400,
 				headers: { 'content-type': 'text/plain; charset=utf-8' },
