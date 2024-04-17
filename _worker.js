@@ -1,18 +1,14 @@
 // 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限
 let mytoken = 'passwd';
 
-// Set CORS to all /api responses
-export const onRequest = async (context) => {
-	const response = await context.next();
-	response.headers.set('Access-Control-Allow-Origin', '*');
-	response.headers.set('Access-Control-Max-Age', '86400');
-	return response;
-};
+
 export default {
 	async fetch(request, env) {
 		// 如果环境变量中有 TOKEN，则将其赋值给 mytoken，否则保持默认值
 		mytoken = env.TOKEN || mytoken;
-
+		env.headers = {
+			'Origin': "*"// 替换为您的应用
+		}
 		let KV;
 		// 检查 KV (键值存储) 是否已经被设置
 		if (env.KV) {
