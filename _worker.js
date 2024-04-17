@@ -1,6 +1,19 @@
 // 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限
 let mytoken= 'passwd';
 
+// Respond to OPTIONS method
+export const onRequestOptions = async () => {
+    return new Response(null, {
+        status: 204,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS',
+            'Access-Control-Max-Age': '86400',
+        },
+    });
+};
+
 export default {
 	async fetch (request, env) {
 		// 如果环境变量中有 TOKEN，则将其赋值给 mytoken，否则保持默认值
