@@ -13,7 +13,13 @@ export const onRequestOptions = async () => {
         },
     });
 };
-
+// Set CORS to all /api responses
+export const onRequest = async (context) => {
+    const response = await context.next();
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Max-Age', '86400');
+    return response;
+};
 export default {
 	async fetch (request, env) {
 		// 如果环境变量中有 TOKEN，则将其赋值给 mytoken，否则保持默认值
