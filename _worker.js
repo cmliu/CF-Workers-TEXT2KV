@@ -3,7 +3,7 @@ let mytoken = 'passwd';
 
 
 export default {
-	async fetch(request, env) {
+	async handleRequest(request, env) {
 		// 如果环境变量中有 TOKEN，则将其赋值给 mytoken，否则保持默认值
 		mytoken = env.TOKEN || mytoken;
 		env.headers = {
