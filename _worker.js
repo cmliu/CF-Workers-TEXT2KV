@@ -1,29 +1,11 @@
 // 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限
 let mytoken = 'passwd';
-addEventListener('fetch', event => {
-	event.respondWith(handleRequest(event.request));
-});
-
-async function handleRequest(request) {
-	const headers = new Headers({
-		'Access-Control-Allow-Origin': '*', // 替换为允许的来源，例如 'https://your-app.com'
-		'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE', // 替换为允许的方法
-		'Access-Control-Allow-Headers': 'Content-Type, Authorization' // 替换为允许的头部
-	});
-
-	return new Response(null, {
-		headers,
-		status: 200
-	});
-}
 
 export default {
-	async handleRequest(request, env) {
+	async fetch(request, env) {
 		// 如果环境变量中有 TOKEN，则将其赋值给 mytoken，否则保持默认值
 		mytoken = env.TOKEN || mytoken;
-		env.headers = {
-			'Origin': '*'// 替换为您的应用
-		}
+
 		let KV;
 		// 检查 KV (键值存储) 是否已经被设置
 		if (env.KV) {
