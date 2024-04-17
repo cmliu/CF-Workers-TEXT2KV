@@ -7,7 +7,7 @@ export default {
 		// 如果环境变量中有 TOKEN，则将其赋值给 mytoken，否则保持默认值
 		mytoken = env.TOKEN || mytoken;
 		env.headers = {
-			'Origin': 'https://workout.zcrich.cn'// 替换为您的应用
+			'Origin': '*'// 替换为您的应用
 		}
 		let KV;
 		// 检查 KV (键值存储) 是否已经被设置
