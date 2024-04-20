@@ -31,6 +31,18 @@ export default {
 
 		// 检查提供的 token 是否与 mytoken 相符
 		if (token === mytoken) {
+
+			// 检查 Origin 头部，以确保请求来自允许的域名
+			const allowedOrigin = 'https://zcrich.cn'; // 允许的域名
+			const origin = request.headers.get('Origin');
+			if (origin && origin === allowedOrigin) {
+				// 添加 CORS 头部，以允许来自允许域名的请求
+				const response = new Response('Ok');
+				response.headers.set('Access-Control-Allow-Origin', allowedOrigin);
+				response.headers.set('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+				response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Accept, Accept-Language, Accept-Encoding');
+				return response;
+			}
 			const 文件名 = url.pathname.startsWith('/') ? url.pathname.substring(1) : url.pathname;
 
 			if (文件名 == "config" || 文件名 == mytoken) {
