@@ -64,7 +64,7 @@ export default {
 					const value = await KV.get(文件名);
 
 					// //设置特定网站跨域访问权限
-					// const allowedOrigin = 'https://workout.zcrich.cn'; // 允许的域名
+					// const allowedOrigin = '*'; // 允许的域名
 					// const origin = request.headers.get('Origin');
 					// if (origin && origin === allowedOrigin) {
 					// 	// 添加 CORS 头部，以允许来自允许域名的请求
