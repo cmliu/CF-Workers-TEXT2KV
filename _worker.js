@@ -56,16 +56,11 @@ export default {
 				});
 			} else {
 				// 检查 Origin 头部，以确保请求来自允许的域名
-				const allowedOrigin = 'https://zcrich.cn'; // 允许的域名
-				const origin = request.headers.get('Origin');
-				if (origin && origin === allowedOrigin) {
-					// 添加 CORS 头部，以允许来自允许域名的请求
-					const response = new Response('Ok');
-					response.headers.set('Access-Control-Allow-Origin', allowedOrigin);
+					// const response = new Response('Ok');
+					response.headers.set('Access-Control-Allow-Origin', '*');
 					response.headers.set('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
 					response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Accept, Accept-Language, Accept-Encoding');
-					return response;
-				}
+
 				// 获取 URL 查询参数中的 'text' 和 'b64'，如果不存在则赋值为 "null"
 				const text = url.searchParams.get('text') || "null";
 				const b64 = url.searchParams.get('b64') || "null";
