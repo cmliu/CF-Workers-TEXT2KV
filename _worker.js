@@ -62,24 +62,26 @@ export default {
 				// 如果 'text' 和 'b64' 都为 "null"，则从 KV 中读取并返回文件内容
 				if (text === "null" && b64 === "null") {
 					const value = await KV.get(文件名);
-					// const allowedOrigin = 'https://workout.zcrich.cn'; // 允许的域名
-					// const origin = request.headers.get('Origin');
-					// if (origin && origin === allowedOrigin) {
-					// 	// 添加 CORS 头部，以允许来自允许域名的请求
-					// 	const response = new Response(value);
-					// 	response.headers.set('Access-Control-Allow-Origin', allowedOrigin);
-					// 	response.headers.set('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-					// 	response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Accept, Accept-Language, Accept-Encoding');
-					// 	return response;
-					// }
+
+					//设置特定网站跨域访问权限
+					const allowedOrigin = 'https://workout.zcrich.cn'; // 允许的域名
+					const origin = request.headers.get('Origin');
+					if (origin && origin === allowedOrigin) {
+						// 添加 CORS 头部，以允许来自允许域名的请求
+						return new Response(value, {
+							status: 200,
+							headers: {
+								'content-type': 'text/plain; charset=utf-8',
+								'Access-Control-Allow-Origin': allowedOrigin,
+								'Access-Control-Allow-Methods': 'GET,OPTIONS',
+								'Access-Control-Allow-Headers': 'Content-Type, Accept-Language, Accept-Encoding'
+							}
+						});
+					}
 					return new Response(value, {
 						status: 200,
 						headers: {
 							'content-type': 'text/plain; charset=utf-8',
-							// 'Access-Control-Allow-Origin': '*',
-							// 'Access-Control-Allow-Headers': '*',
-							// 'Access-Control-Allow-Methods': 'GET, OPTIONS',
-							// 'Access-Control-Max-Age': '86400',
 						},
 					});
 				} else {
