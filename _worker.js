@@ -41,7 +41,7 @@ async function handleFileOperation(KV, fileName, url, token) {
     const b64 = url.searchParams.get('b64') || null;
 
     if (!text && !b64) {
-        const value = await KV.get(fileName, { cacheTtl: 0 });
+        const value = await KV.get(fileName, { cacheTtl: 60 });
         if (value === null) {
             return createResponse('File not found', 404);
         }
@@ -50,7 +50,7 @@ async function handleFileOperation(KV, fileName, url, token) {
 
     let content = text || base64Decode(空格替换加号(b64));
     await KV.put(fileName, content);
-    const verifiedContent = await KV.get(fileName, { cacheTtl: 0 });
+    const verifiedContent = await KV.get(fileName, { cacheTtl: 60 });
 
     if (verifiedContent !== content) {
         throw new Error('Content verification failed after write operation');
