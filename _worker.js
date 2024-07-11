@@ -92,72 +92,55 @@ function 空格替换加号(str) {
     return str.replace(/ /g, '+');
 }
 
-function 下载bat(域名, token) {
-    return `@echo off
-chcp 65001
-setlocal EnableDelayedExpansion
-
-set "DOMAIN=${域名}"
-set "TOKEN=${token}"
-
-if "%~1"=="" (
-    echo 请将文件拖放到此批处理文件上
-    pause
-    exit /b 1
-)
-
-set "FILENAME=%~nx1"
-set "INPUTFILE=%~f1"
-
-if not exist "%INPUTFILE%" (
-    echo 文件不存在: %INPUTFILE%
-    pause
-    exit /b 1
-)
-
-:: 读取文件的前65行
-powershell -command "Get-Content -Path '%INPUTFILE%' -Encoding UTF8 -TotalCount 65 | Out-File -FilePath temp.txt -Encoding utf8"
-
-if %errorlevel% neq 0 (
-    echo 读取文件失败
-    del temp.txt 2>nul
-    pause
-    exit /b 1
-)
-
-:: 将内容转换为Base64
-powershell -command "$content = [System.IO.File]::ReadAllText('temp.txt', [System.Text.Encoding]::UTF8); [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))" > temp.b64
-
-if %errorlevel% neq 0 (
-    echo Base64转换失败
-    del temp.txt 2>nul
-    del temp.b64 2>nul
-    pause
-    exit /b 1
-)
-
-set /p BASE64_TEXT=<temp.b64
-
-del temp.txt 2>nul
-del temp.b64 2>nul
-
-set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%&b64=!BASE64_TEXT!&t=%TIME%"
-
-echo 正在发送请求...
-powershell -Command "$response = Invoke-WebRequest -Uri '%URL%' -UseBasicParsing; $response.Content"
-
-if %errorlevel% neq 0 (
-    echo 更新数据失败
-) else (
-    echo 更新数据成功
-)
-
-echo.
-echo 按任意键退出...
-pause >nul
-exit /b 0
-`;
+function 下载bat(域名,token) {
+	return [
+	  `@echo off`,
+	  `chcp 65001`,
+	  `setlocal`,
+	  ``,
+	  `set "DOMAIN=${域名}"`,
+	  `set "TOKEN=${token}"`,
+	  ``,
+	  `rem %~nx1表示第一个参数的文件名和扩展名`,
+	  `set "FILENAME=%~nx1"`,
+	  ``,
+	  `rem PowerShell命令读取文件的前65行内容，将内容转换为UTF8并进行base64编码`,
+	  `for /f "delims=" %%i in ('powershell -command "$content = ((Get-Content -Path '%cd%/%FILENAME%' -Encoding UTF8) | Select-Object -First 65) -join [Environment]::NewLine; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))"') do set "BASE64_TEXT=%%i"`,
+	  ``,
+	  `rem 将内容保存到response.txt`,
+	  `rem echo %BASE64_TEXT% > response.txt`,
+	  ``,
+	  `rem 构造带有文件名和内容作为参数的URL`,
+	  `set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%^&b64=%BASE64_TEXT%"`,
+	  ``,
+	  `rem 显示请求的响应 `,
+	  `rem powershell -Command "(Invoke-WebRequest -Uri '%URL%').Content"`,
+	  `start %URL%`,
+	  `endlocal`,
+	  ``,
+	  `echo 更新数据完成,倒数5秒后自动关闭窗口...`,
+	  `timeout /t 5 >nul`,
+	  `exit`
+	].join('\r\n');
 }
+
+function 下载sh(域名,token) {
+	return `#!/bin/bash
+export LANG=zh_CN.UTF-8
+DOMAIN="${域名}"
+TOKEN="${token}"
+if [ -n "$1" ]; then 
+  FILENAME="$1"
+else
+  echo "无文件名"
+  exit 1
+fi
+BASE64_TEXT=$(head -n 65 $FILENAME | base64 -w 0)
+curl -k "https://$DOMAIN/$FILENAME?token=$TOKEN&b64=$BASE64_TEXT"
+echo "更新数据完成"
+`
+}
+
 function 下载sh(域名, token) {
     return `#!/bin/bash
 set -e
