@@ -3,14 +3,9 @@ let mytoken = 'passwd';
 export default {
     async fetch(request, env) {
         try {
-            // 如果环境变量中有 TOKEN，则将其赋值给 mytoken，否则保持默认值
             mytoken = env.TOKEN || mytoken;
 
-            let KV;
-            // 检查 KV (键值存储) 是否已经被设置
-            if (env.KV) {
-                KV = env.KV;
-            } else {
+            if (!env.KV) {
                 throw new Error('KV 命名空间未绑定');
             }
 
@@ -23,16 +18,16 @@ export default {
 
             const fileName = url.pathname.startsWith('/') ? url.pathname.substring(1) : url.pathname;
 
-            switch(fileName) {
+            switch (fileName) {
                 case "config":
                 case mytoken:
-                    return createResponse(configHTML(url.hostname, token), 200, {'Content-Type': 'text/html; charset=UTF-8'});
+                    return createResponse(configHTML(url.hostname, token), 200, { 'Content-Type': 'text/html; charset=UTF-8' });
                 case "config/update.bat":
-                    return createResponse(下载bat(url.hostname, token), 200, {"Content-Disposition": 'attachment; filename=update.bat', "Content-Type": "text/plain; charset=utf-8"});
+                    return createResponse(下载bat(url.hostname, token), 200, { "Content-Disposition": 'attachment; filename=update.bat', "Content-Type": "text/plain; charset=utf-8" });
                 case "config/update.sh":
-                    return createResponse(下载sh(url.hostname, token), 200, {"Content-Disposition": 'attachment; filename=update.sh', "Content-Type": "text/plain; charset=utf-8"});
+                    return createResponse(下载sh(url.hostname, token), 200, { "Content-Disposition": 'attachment; filename=update.sh', "Content-Type": "text/plain; charset=utf-8" });
                 default:
-                    return await handleFileOperation(KV, fileName, url, token);
+                    return await handleFileOperation(env.KV, fileName, url, token);
             }
         } catch (error) {
             console.error("Error:", error);
@@ -46,7 +41,7 @@ async function handleFileOperation(KV, fileName, url, token) {
     const b64 = url.searchParams.get('b64') || null;
 
     if (!text && !b64) {
-        const value = await KV.get(fileName);
+        const value = await KV.get(fileName, { cacheTtl: 0 });
         if (value === null) {
             return createResponse('File not found', 404);
         }
@@ -55,7 +50,7 @@ async function handleFileOperation(KV, fileName, url, token) {
 
     let content = text || base64Decode(空格替换加号(b64));
     await KV.put(fileName, content);
-    const verifiedContent = await KV.get(fileName);
+    const verifiedContent = await KV.get(fileName, { cacheTtl: 0 });
 
     if (verifiedContent !== content) {
         throw new Error('Content verification failed after write operation');
@@ -100,20 +95,12 @@ function 下载bat(域名, token) {
         `set "DOMAIN=${域名}"`,
         `set "TOKEN=${token}"`,
         '',
-        'rem %~nx1表示第一个参数的文件名和扩展名',
         'set "FILENAME=%~nx1"',
         '',
-        'rem PowerShell命令读取文件的前65行内容，将内容转换为UTF8并进行base64编码',
         'for /f "delims=" %%i in (\'powershell -command "$content = ((Get-Content -Path \'%cd%/%FILENAME%\' -Encoding UTF8) | Select-Object -First 65) -join [Environment]::NewLine; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))"\') do set "BASE64_TEXT=%%i"',
         '',
-        'rem 将内容保存到response.txt',
-        'rem echo %BASE64_TEXT% > response.txt',
-        '',
-        'rem 构造带有文件名和内容作为参数的URL',
         'set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%^&b64=%BASE64_TEXT%"',
         '',
-        'rem 显示请求的响应 ',
-        'rem powershell -Command "(Invoke-WebRequest -Uri \'%URL%\').Content"',
         'start %URL%',
         'endlocal',
         '',
