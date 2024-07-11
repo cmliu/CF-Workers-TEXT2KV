@@ -108,7 +108,7 @@ if "%~1"=="" (
 
 set "FILENAME=%~nx1"
 
-powershell -command "$content = if (Test-Path '%~1') { (Get-Content -Path '%~1' -Encoding UTF8 -ErrorAction Stop | Select-Object -First 65) -join \"`n\" } else { Write-Error 'File not found'; exit 1 }; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))" > temp.b64
+powershell -command "$content = if (Test-Path '%~1') { (Get-Content -Path '%~1' -Encoding UTF8 -ErrorAction Stop | Select-Object -First 65) -join '\\n' } else { Write-Error 'File not found'; exit 1 }; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))" > temp.b64
 
 if %errorlevel% neq 0 (
     echo 读取文件失败
