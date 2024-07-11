@@ -16,9 +16,10 @@ export default {
                 return createResponse('token 有误', 403);
             }
 
-            const fileName = url.pathname.startsWith('/') ? url.pathname.substring(1) : url.pathname;
+            let fileName = url.pathname.startsWith('/') ? url.pathname.substring(1) : url.pathname;
+            fileName = fileName.toLowerCase(); // 将文件名转换为小写
 
-            switch (fileName.toLowerCase()) { // 使用小写进行匹配
+            switch (fileName) {
                 case "config":
                 case mytoken:
                     return createResponse(configHTML(url.hostname, token), 200, { 'Content-Type': 'text/html; charset=UTF-8' });
@@ -41,7 +42,7 @@ async function handleFileOperation(KV, fileName, url, token) {
     const b64 = url.searchParams.get('b64') || null;
 
     if (!text && !b64) {
-        const value = await KV.get(fileName.toLowerCase(), { cacheTtl: 60 }); // 使用小写进行匹配
+        const value = await KV.get(fileName, { cacheTtl: 60 });
         if (value === null) {
             return createResponse('File not found', 404);
         }
@@ -49,8 +50,8 @@ async function handleFileOperation(KV, fileName, url, token) {
     }
 
     let content = text || base64Decode(空格替换加号(b64));
-    await KV.put(fileName, content); // 保持原始文件名
-    const verifiedContent = await KV.get(fileName.toLowerCase(), { cacheTtl: 60 }); // 使用小写进行匹配
+    await KV.put(fileName, content);
+    const verifiedContent = await KV.get(fileName, { cacheTtl: 60 });
 
     if (verifiedContent !== content) {
         throw new Error('Content verification failed after write operation');
