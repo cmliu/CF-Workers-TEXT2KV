@@ -141,28 +141,6 @@ echo "更新数据完成"
 `
 }
 
-function 下载sh(域名, token) {
-    return `#!/bin/bash
-set -e
-export LANG=zh_CN.UTF-8
-DOMAIN="${域名}"
-TOKEN="${token}"
-
-if [ -z "$1" ]; then
-  echo "请提供文件名作为参数"
-  exit 1
-fi
-
-FILENAME="$1"
-BASE64_TEXT=$(head -n 65 "$FILENAME" | base64 -w 0)
-TIMESTAMP=$(date +%s%N)
-
-RESPONSE=$(curl -sS -k "https://$DOMAIN/$FILENAME?token=$TOKEN&b64=$BASE64_TEXT&t=$TIMESTAMP")
-echo "$RESPONSE"
-echo "更新数据完成"
-`;
-}
-
 function configHTML(域名, token) {
     return `
 <!DOCTYPE html>
