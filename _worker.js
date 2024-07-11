@@ -95,29 +95,43 @@ function 空格替换加号(str) {
 function 下载bat(域名, token) {
     return `@echo off
 chcp 65001
-setlocal
+setlocal EnableDelayedExpansion
 
 set "DOMAIN=${域名}"
 set "TOKEN=${token}"
 
 if "%~1"=="" (
-    echo 请提供文件名作为参数
+    echo 请将文件拖放到此批处理文件上
+    pause
     exit /b 1
 )
 
 set "FILENAME=%~nx1"
 
-powershell -command "$content = ((Get-Content -Path '%cd%/%FILENAME%' -Encoding UTF8 -ErrorAction Stop | Select-Object -First 65) -join [Environment]::NewLine); [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))" > temp.b64
+powershell -command "$content = if (Test-Path '%~1') { (Get-Content -Path '%~1' -Encoding UTF8 -ErrorAction Stop | Select-Object -First 65) -join \"`n\" } else { Write-Error 'File not found'; exit 1 }; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))" > temp.b64
+
+if %errorlevel% neq 0 (
+    echo 读取文件失败
+    del temp.b64 2>nul
+    pause
+    exit /b 1
+)
 
 set /p BASE64_TEXT=<temp.b64
 del temp.b64
 
-set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%^&b64=%BASE64_TEXT%^&t=%TIME%"
+set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%&b64=!BASE64_TEXT!&t=%TIME%"
 
 powershell -Command "$response = Invoke-WebRequest -Uri '%URL%' -UseBasicParsing; $response.Content"
 
-echo 更新数据完成,倒数5秒后自动关闭窗口...
-timeout /t 5 >nul
+if %errorlevel% neq 0 (
+    echo 更新数据失败
+) else (
+    echo 更新数据成功
+)
+
+echo 按任意键退出...
+pause >nul
 exit /b 0
 `;
 }
@@ -186,7 +200,7 @@ function configHTML(域名, token) {
 
         function copyDocumentURL() {
             const keyword = document.getElementById('keyword').value;
-            const url = 'https://${域名}/' + keyword + '?token=${token}';
+            const url = 'https://${域名}/' + keyword + '?token=${token}&t=' + Date.now();
             navigator.clipboard.writeText(url).then(() => alert('文档地址已复制到剪贴板'));
         }
     </script>
