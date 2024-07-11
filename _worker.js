@@ -1,4 +1,3 @@
-// 定义一个名为 mytoken 的变量，并将 'passwd' 作为默认的读写权限
 let mytoken = 'passwd';
 
 export default {
@@ -29,9 +28,9 @@ export default {
                 case mytoken:
                     return createResponse(configHTML(url.hostname, token), 200, {'Content-Type': 'text/html; charset=UTF-8'});
                 case "config/update.bat":
-                    return createResponse(下载bat(url.hostname, token), 200, {"Content-Disposition": `attachment; filename=update.bat`, "content-type": "text/plain; charset=utf-8"});
+                    return createResponse(下载bat(url.hostname, token), 200, {"Content-Disposition": 'attachment; filename=update.bat', "Content-Type": "text/plain; charset=utf-8"});
                 case "config/update.sh":
-                    return createResponse(下载sh(url.hostname, token), 200, {"Content-Disposition": `attachment; filename=update.sh`, "content-type": "text/plain; charset=utf-8"});
+                    return createResponse(下载sh(url.hostname, token), 200, {"Content-Disposition": 'attachment; filename=update.sh', "Content-Type": "text/plain; charset=utf-8"});
                 default:
                     return await handleFileOperation(KV, fileName, url, token);
             }
@@ -57,7 +56,7 @@ async function handleFileOperation(KV, fileName, url, token) {
     let content = text || base64Decode(空格替换加号(b64));
     await KV.put(fileName, content);
     const verifiedContent = await KV.get(fileName);
-    
+
     if (verifiedContent !== content) {
         throw new Error('Content verification failed after write operation');
     }
@@ -67,7 +66,7 @@ async function handleFileOperation(KV, fileName, url, token) {
 
 function createResponse(body, status = 200, additionalHeaders = {}) {
     const headers = {
-        'content-type': 'text/plain; charset=utf-8',
+        'Content-Type': 'text/plain; charset=utf-8',
         'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0',
@@ -92,40 +91,40 @@ function 空格替换加号(str) {
     return str.replace(/ /g, '+');
 }
 
-function 下载bat(域名,token) {
-	return [
-	  `@echo off`,
-	  `chcp 65001`,
-	  `setlocal`,
-	  ``,
-	  `set "DOMAIN=${域名}"`,
-	  `set "TOKEN=${token}"`,
-	  ``,
-	  `rem %~nx1表示第一个参数的文件名和扩展名`,
-	  `set "FILENAME=%~nx1"`,
-	  ``,
-	  `rem PowerShell命令读取文件的前65行内容，将内容转换为UTF8并进行base64编码`,
-	  `for /f "delims=" %%i in ('powershell -command "$content = ((Get-Content -Path '%cd%/%FILENAME%' -Encoding UTF8) | Select-Object -First 65) -join [Environment]::NewLine; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))"') do set "BASE64_TEXT=%%i"`,
-	  ``,
-	  `rem 将内容保存到response.txt`,
-	  `rem echo %BASE64_TEXT% > response.txt`,
-	  ``,
-	  `rem 构造带有文件名和内容作为参数的URL`,
-	  `set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%^&b64=%BASE64_TEXT%"`,
-	  ``,
-	  `rem 显示请求的响应 `,
-	  `rem powershell -Command "(Invoke-WebRequest -Uri '%URL%').Content"`,
-	  `start %URL%`,
-	  `endlocal`,
-	  ``,
-	  `echo 更新数据完成,倒数5秒后自动关闭窗口...`,
-	  `timeout /t 5 >nul`,
-	  `exit`
-	].join('\r\n');
+function 下载bat(域名, token) {
+    return [
+        '@echo off',
+        'chcp 65001',
+        'setlocal',
+        '',
+        `set "DOMAIN=${域名}"`,
+        `set "TOKEN=${token}"`,
+        '',
+        'rem %~nx1表示第一个参数的文件名和扩展名',
+        'set "FILENAME=%~nx1"',
+        '',
+        'rem PowerShell命令读取文件的前65行内容，将内容转换为UTF8并进行base64编码',
+        'for /f "delims=" %%i in (\'powershell -command "$content = ((Get-Content -Path \'%cd%/%FILENAME%\' -Encoding UTF8) | Select-Object -First 65) -join [Environment]::NewLine; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))"\') do set "BASE64_TEXT=%%i"',
+        '',
+        'rem 将内容保存到response.txt',
+        'rem echo %BASE64_TEXT% > response.txt',
+        '',
+        'rem 构造带有文件名和内容作为参数的URL',
+        'set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%^&b64=%BASE64_TEXT%"',
+        '',
+        'rem 显示请求的响应 ',
+        'rem powershell -Command "(Invoke-WebRequest -Uri \'%URL%\').Content"',
+        'start %URL%',
+        'endlocal',
+        '',
+        'echo 更新数据完成,倒数5秒后自动关闭窗口...',
+        'timeout /t 5 >nul',
+        'exit'
+    ].join('\r\n');
 }
 
-function 下载sh(域名,token) {
-	return `#!/bin/bash
+function 下载sh(域名, token) {
+    return `#!/bin/bash
 export LANG=zh_CN.UTF-8
 DOMAIN="${域名}"
 TOKEN="${token}"
@@ -136,7 +135,7 @@ else
   exit 1
 fi
 BASE64_TEXT=$(head -n 65 $FILENAME | base64 -w 0)
-curl -k "https://$DOMAIN/$FILENAME?token=$TOKEN&b64=$BASE64_TEXT"
+curl -k "https://${域名}/${FILENAME}?token=${token}&b64=${BASE64_TEXT}"
 echo "更新数据完成"
 `
 }
