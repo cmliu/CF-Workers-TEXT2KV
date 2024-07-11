@@ -64,20 +64,20 @@ export default {
 					const value = await KV.get(文件名);
 
 					// //设置特定网站跨域访问权限
-					// const allowedOrigin = '*'; // 允许的域名
-					// const origin = request.headers.get('Origin');
-					// if (origin && origin === allowedOrigin) {
-					// 	// 添加 CORS 头部，以允许来自允许域名的请求
-					// 	return new Response(value, {
-					// 		status: 200,
-					// 		headers: {
-					// 			'content-type': 'text/plain; charset=utf-8',
-					// 			'Access-Control-Allow-Origin': allowedOrigin,
-					// 			'Access-Control-Allow-Methods': 'GET,OPTIONS',
-					// 			'Access-Control-Allow-Headers': 'Content-Type, Accept-Language, Accept-Encoding'
-					// 		}
-					// 	});
-					// }
+					 const allowedOrigin = '*'; // 允许的域名
+					const origin = request.headers.get('Origin');
+					if (origin && origin === allowedOrigin) {
+						// 添加 CORS 头部，以允许来自允许域名的请求
+						return new Response(value, {
+							status: 200,
+							headers: {
+								'content-type': 'text/plain; charset=utf-8',
+								'Access-Control-Allow-Origin': allowedOrigin,
+								'Access-Control-Allow-Methods': 'GET,OPTIONS',
+								'Access-Control-Allow-Headers': 'Content-Type, Accept-Language, Accept-Encoding'
+							}
+						});
+					}
 					return new Response(value, {
 						status: 200,
 						headers: {
