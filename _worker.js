@@ -107,21 +107,43 @@ if "%~1"=="" (
 )
 
 set "FILENAME=%~nx1"
+set "INPUTFILE=%~f1"
 
-powershell -command "$content = if (Test-Path '%~1') { (Get-Content -Path '%~1' -Encoding UTF8 -ErrorAction Stop | Select-Object -First 65) -join '\\n' } else { Write-Error 'File not found'; exit 1 }; [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))" > temp.b64
+if not exist "%INPUTFILE%" (
+    echo 文件不存在: %INPUTFILE%
+    pause
+    exit /b 1
+)
+
+:: 读取文件的前65行
+powershell -command "Get-Content -Path '%INPUTFILE%' -Encoding UTF8 -TotalCount 65 | Out-File -FilePath temp.txt -Encoding utf8"
 
 if %errorlevel% neq 0 (
     echo 读取文件失败
+    del temp.txt 2>nul
+    pause
+    exit /b 1
+)
+
+:: 将内容转换为Base64
+powershell -command "$content = [System.IO.File]::ReadAllText('temp.txt', [System.Text.Encoding]::UTF8); [convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($content))" > temp.b64
+
+if %errorlevel% neq 0 (
+    echo Base64转换失败
+    del temp.txt 2>nul
     del temp.b64 2>nul
     pause
     exit /b 1
 )
 
 set /p BASE64_TEXT=<temp.b64
-del temp.b64
+
+del temp.txt 2>nul
+del temp.b64 2>nul
 
 set "URL=https://%DOMAIN%/%FILENAME%?token=%TOKEN%&b64=!BASE64_TEXT!&t=%TIME%"
 
+echo 正在发送请求...
 powershell -Command "$response = Invoke-WebRequest -Uri '%URL%' -UseBasicParsing; $response.Content"
 
 if %errorlevel% neq 0 (
@@ -130,12 +152,12 @@ if %errorlevel% neq 0 (
     echo 更新数据成功
 )
 
+echo.
 echo 按任意键退出...
 pause >nul
 exit /b 0
 `;
 }
-
 function 下载sh(域名, token) {
     return `#!/bin/bash
 set -e
