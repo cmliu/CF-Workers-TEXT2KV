@@ -185,6 +185,7 @@ function configHTML(domain, token) {
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .d-h2 { display:flex;}
 
         /* Light theme */
         body.light { background-color: #f0f0f0; color: #333; }
