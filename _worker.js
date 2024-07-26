@@ -202,9 +202,9 @@ function configHTML(domain, token) {
         .container.dark { background-color: #2d2d2d; }
     </style>
     <!-- 引入 Highlight.js 的 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
     <!-- 引入 Highlight.js 的 JavaScript 文件 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
