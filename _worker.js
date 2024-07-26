@@ -188,12 +188,15 @@ function configHTML(domain, token) {
         margin-top: 0px; 
         border: none; 
         border-radius: 5px; 
+        flex-basis: 150px; /* 固定按钮宽度 */
+    flex-shrink: 0; /* 防止按钮缩小 */
         }
         button:hover { opacity: 0.9; }
         input[type="text"] { 
             padding: 9px 10px;
             border-radius: 5px;
             flex-grow: 0;
+            min-width:0;
         }
         .tips {
             color:grey;
