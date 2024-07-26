@@ -227,7 +227,7 @@ function configHTML(domain, token) {
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
         <div class="d-h2">
         <h2 class="d-flex">Windows 脚本:</h2>
-        <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
+        <button  class="d-flex";onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
         <div>
         <pre><code>update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
