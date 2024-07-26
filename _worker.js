@@ -176,7 +176,7 @@ function configHTML(domain, token) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF-Workers-TEXT2KV 配置信息</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 15px; max-width: 800px; margin: 0 auto; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 15px; max-width: 1000px; margin: 0 auto; }
         h1 { text-align: center; }
         h2 { text-align: left; font-size:1.3rem}
         pre,code { padding: 0px; border-radius: 8px; overflow-x: auto; white-space: nowrap; }
