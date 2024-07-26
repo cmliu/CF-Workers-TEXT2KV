@@ -186,7 +186,7 @@ function configHTML(domain, token) {
         input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .tips {
             color:grey;
-            font-size:0.5em;
+            font-size:0.9em;
         }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
             /* Flexbox layout for h2 and button */
