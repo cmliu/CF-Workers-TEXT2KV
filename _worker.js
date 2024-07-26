@@ -185,12 +185,12 @@ function configHTML(domain, token) {
         cursor: pointer; 
         padding: 10px 10px; 
         margin-top: 0px; 
-        margin-left: 10px;
+        margin-left: 5px;
         border: none; 
         border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { 
-            width: calc(100% - 225px);
+            width: calc(100% - 19rem);
             padding: 10px;
             border-radius: 5px;
         }
