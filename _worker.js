@@ -186,10 +186,10 @@ function configHTML(domain, token) {
         input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
             /* Flexbox layout for h2 and button */
-        .flex-row { display: flex; justify-content: space-between; align-items: center; }
+        .flex-row { display: flex; justify-content: space-between; align-items: center; margin-bottom:10px;}
         .download-button {
             padding: 5px 10px; /* 调整按钮的内边距，改变大小 */
-            margin-top:0 !importan;
+            margin:0 !importan;
             background-color: Indigo !important; /* 设置按钮背景颜色 */
             color: white; /* 设置按钮文本颜色 */
             border: none; /* 去掉边框 */
