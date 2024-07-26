@@ -190,7 +190,7 @@ function configHTML(domain, token) {
         display: flex; 
         justify-content: space-between; 
         align-items: center; 
-        margin-bottom:10px !important;}
+        margin-bottom:-19px !important;}
         .download-button {
             padding: 5px 10px; /* 调整按钮的内边距，改变大小 */
             margin:0 !importan;
