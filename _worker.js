@@ -178,6 +178,7 @@ function configHTML(domain, token) {
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 10px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; }
         pre { padding: 15px; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
+        code { background:transform}
         button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 25px); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
