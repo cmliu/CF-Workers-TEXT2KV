@@ -268,8 +268,10 @@ function configHTML(domain, token) {
         <h2>在线文档查询:</h2>
         <div class="flex-row">
         <input type="text" id="keyword" placeholder="请输入要查询的文档">
+        <div>
         <button onclick="viewDocument()">查看文档内容</button>
         <button onclick="copyDocumentURL()">复制文档地址</button>
+        </div>
         </div>
     </div>
     <script>
