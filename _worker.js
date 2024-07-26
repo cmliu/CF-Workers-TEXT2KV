@@ -148,7 +148,7 @@ function configHTML(域名, token) {
     <h1>TEXT2KV 配置信息</h1>
     <p>
         <strong>服务域名:</strong> ${域名}<br>
-        <strong>TOKEN:</strong> ${token}<br>
+        <strong>TOKEN:</strong>   ${token}<br>
     </p>
     <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
     <h2>Windows 脚本:</h2>
