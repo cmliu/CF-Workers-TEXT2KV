@@ -191,7 +191,7 @@ function configHTML(domain, token) {
             padding-left: 10px;
         }
         .container { 
-        padding: 10px 15px 15px 15px; 
+        padding: 5px 15px 15px 15px; 
         border-radius: 10px; 
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
             /* Flexbox layout for h2 and button */
