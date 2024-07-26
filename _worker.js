@@ -201,6 +201,8 @@ function configHTML(domain, token) {
         button.dark { background-color: #1f6feb; color: #c9d1d9; }
         input[type="text"].dark { border: 1px solid #444; }
         .container.dark { background-color: #2d2d2d; }
+                /* Flexbox layout for h2 and button */
+        .flex-row { display: flex; justify-content: space-between; align-items: center; }
     </style>
     <!-- 引入 Highlight.js 的 CSS 文件 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/obsidian.min.css">
@@ -224,8 +226,10 @@ function configHTML(domain, token) {
             <strong>TOKEN:</strong> ${token}<br>
         </p>
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
-        <h2>Windows 脚本:</h2>
-        <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
+                <div class="flex-row">
+            <h2>Windows 脚本:</h2>
+            <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
+        </div>
         <pre><code>update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
         <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
