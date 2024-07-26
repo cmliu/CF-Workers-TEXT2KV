@@ -187,7 +187,7 @@ function configHTML(domain, token) {
         .tips {
             color:grey;
             font-size:0.8em;
-            border:0 0 0 1px;
+            border:0 0 0 1px red;
         }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
             /* Flexbox layout for h2 and button */
