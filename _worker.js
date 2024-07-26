@@ -178,7 +178,7 @@ function configHTML(domain, token) {
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 15px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; }
-        h2 { text-align: left; font-size:1.3rem; width:50%}
+        h2 { text-align: left; font-size:1.3rem}
         pre,code { padding: 0px; border-radius: 8px; overflow-x: auto; white-space: nowrap; }
         pre code { background: none; padding: 0; border: none; }
         button { cursor: pointer; padding: 10px 10px; margin-top: 5px; border: none; border-radius: 5px; }
@@ -224,8 +224,10 @@ function configHTML(domain, token) {
             <strong>TOKEN:</strong> ${token}<br>
         </p>
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
+        <div class="d-h2">
         <h2>Windows 脚本:</h2>
         <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
+        <div>
         <pre><code>update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
         <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
