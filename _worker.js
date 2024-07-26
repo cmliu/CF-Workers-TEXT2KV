@@ -200,7 +200,7 @@ function configHTML(domain, token) {
         .container.dark { background-color: #2d2d2d; }
     </style>
     <!-- 引入 Highlight.js 的 CSS 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/1c-light.min.css" integrity="sha512-kM8PiTB2J9j9MJxP4pg5Morv1nvatwpY0xsNsHDpHobti6+sdvObgLPhJ7lOIHYUqQmTAUAE+CaTcQXR47XO2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" integrity="sha512-kM8PiTB2J9j9MJxP4pg5Morv1nvatwpY0xsNsHDpHobti6+sdvObgLPhJ7lOIHYUqQmTAUAE+CaTcQXR47XO2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- 引入 Highlight.js 的 JavaScript 文件 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
