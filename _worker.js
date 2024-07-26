@@ -229,6 +229,7 @@ function configHTML(domain, token) {
             display: flex;
             align-items: center;
             gap: 5px;
+            white-space: nowrap;
         }
 
         /* Light theme */
