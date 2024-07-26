@@ -206,7 +206,7 @@ function configHTML(domain, token) {
         body.light { background-color: #f0f0f0; color: #333; }
         h1.light { color: #444; }
         pre.light { background-color: #fff; border: 1px solid #ddd; }
-        button.light { background-color: #007bff; color: #fff; }
+        button.light { background-color: MediumSlateBlue; color: #fff; }
         input[type="text"].light { border: 1px solid #ddd; }
         .container.light { background-color: #fff; }
 
@@ -214,7 +214,7 @@ function configHTML(domain, token) {
         body.dark { background-color: #1e1e1e; color: #c9d1d9; }
         h1.dark { color: #c9d1d9; }
         pre.dark { background-color: #2d2d2d; border: 1px solid #444; }
-        button.dark { background-color: #1f6feb; color: #c9d1d9; }
+        button.dark { background-color: MediumSlateBlue; color: #c9d1d9; }
         input[type="text"].dark { border: 1px solid #444; }
         .container.dark { background-color: #2d2d2d; }
     </style>
