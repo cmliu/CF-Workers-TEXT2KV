@@ -190,7 +190,6 @@ function configHTML(domain, token) {
         border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { 
-            width: calc(100% - 19em);
             padding: 9px 10px;
             border-radius: 5px;
             flex-grow: 1;
