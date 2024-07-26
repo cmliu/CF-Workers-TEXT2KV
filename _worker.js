@@ -193,6 +193,7 @@ function configHTML(domain, token) {
             width: calc(100% - 19em);
             padding: 9px 10px;
             border-radius: 5px;
+            flex-grow: 1;
         }
         .tips {
             color:grey;
@@ -225,6 +226,11 @@ function configHTML(domain, token) {
         
         .download-button:hover {
             background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+        }
+        .input-button-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         /* Light theme */
@@ -273,7 +279,7 @@ function configHTML(domain, token) {
         <h2>Linux 脚本:</h2>
         <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
         <h2>在线文档查询:</h2>
-        <div class="flex-row">
+        <div class="input-button-container">
         <input type="text" id="keyword" placeholder="请输入要查询的文档">
         <div class="flex-row">
         <button onclick="viewDocument()">查看文档内容</button>
