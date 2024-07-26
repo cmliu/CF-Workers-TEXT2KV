@@ -182,6 +182,7 @@ function configHTML(domain, token) {
         pre,code { padding: 0px; border-radius: 8px; overflow-x: auto; white-space: nowrap; }
         pre code { background: none; padding: 0; border: none; }
         button { 
+        width:150px;
         cursor: pointer; 
         padding: 10px 10px; 
         margin-top: 0px; 
@@ -230,7 +231,6 @@ function configHTML(domain, token) {
             align-items: center;
             gap: 5px;
             white-space: nowrap;
-            width:100%-50px;
         }
 
         /* Light theme */
