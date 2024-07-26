@@ -191,7 +191,7 @@ function configHTML(domain, token) {
         button:hover { opacity: 0.9; }
         input[type="text"] { 
             width: calc(100% - 19em);
-            padding: 10px;
+            padding: 9px 10px;
             border-radius: 5px;
         }
         .tips {
