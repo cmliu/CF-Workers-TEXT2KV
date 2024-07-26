@@ -138,7 +138,7 @@ function configHTML(域名, token) {
     <title>CF-Workers-TEXT2KV 配置信息</title>
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; }
-        h1 { font-size:2rem;text-align: center; color: #333; }
+        h1 { text-align: center; color: #333; }
         pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
         button { cursor: pointer; padding: 5px 10px; }
         input[type="text"] { width: 200px; padding: 5px; }
@@ -147,8 +147,8 @@ function configHTML(域名, token) {
 <body>
     <h1>TEXT2KV 配置信息</h1>
     <p>
-        服务域名: ${域名}<br>
-        token: ${token}<br>
+        <strong>服务域名:</strong> ${域名}<br>
+        <strong>token:</strong> ${token}<br>
     </p>
     <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
     <h2>Windows 脚本:</h2>
