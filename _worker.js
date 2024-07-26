@@ -190,7 +190,7 @@ function configHTML(domain, token) {
         .download-button {
             padding: 5px 10px; /* 调整按钮的内边距，改变大小 */
             margin-top:0 !importan;
-            background-color: darkpurple !important; /* 设置按钮背景颜色 */
+            background-color: Indigo !important; /* 设置按钮背景颜色 */
             color: white; /* 设置按钮文本颜色 */
             border: none; /* 去掉边框 */
             border-radius: 5px; /* 设置圆角 */
