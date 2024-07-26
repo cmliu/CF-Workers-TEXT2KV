@@ -166,6 +166,7 @@ echo "更新数据完成"
  * @param {String} domain - 域名
  * @param {String} token - 认证 token
  */
+
 function configHTML(domain, token) {
     return `
 <!DOCTYPE html>
@@ -175,9 +176,10 @@ function configHTML(domain, token) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF-Workers-TEXT2KV 配置信息</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 10px; max-width: 800px; margin: 0 auto; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; }
-        pre code { padding: 0px 15px; border: none; border-radius:5px;overflow-x:auto;}
+        pre { padding: 15px; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
+        pre code { background: none; padding: 0; border: none; }
         button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 25px); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
@@ -186,7 +188,7 @@ function configHTML(domain, token) {
         /* Light theme */
         body.light { background-color: #f0f0f0; color: #333; }
         h1.light { color: #444; }
-        code.light { background-color: #fff; border: 1px solid #ddd; }
+        pre.light { background-color: #fff; border: 1px solid #ddd; }
         button.light { background-color: #007bff; color: #fff; }
         input[type="text"].light { border: 1px solid #ddd; }
         .container.light { background-color: #fff; }
@@ -194,15 +196,15 @@ function configHTML(domain, token) {
         /* Dark theme */
         body.dark { background-color: #1e1e1e; color: #c9d1d9; }
         h1.dark { color: #c9d1d9; }
-        code.dark { background-color: #2d2d2d; border: 1px solid #444; }
+        pre.dark { background-color: #2d2d2d; border: 1px solid #444; }
         button.dark { background-color: #1f6feb; color: #c9d1d9; }
         input[type="text"].dark { border: 1px solid #444; }
         .container.dark { background-color: #2d2d2d; }
     </style>
-    <!-- 引入 Highlight.js 的 CSS 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <!-- 引入 Highlight.js 的 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
     <!-- 引入 Highlight.js 的 JavaScript 文件 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -213,9 +215,8 @@ function configHTML(domain, token) {
     </script>
 </head>
 <body>
-<h1>TEXT2KV 配置信息</h1>
-        
     <div class="container">
+        <h1>TEXT2KV 配置信息</h1>
         <p>
             <strong>服务域名:</strong> ${domain}<br>
             <strong>TOKEN:</strong> ${token}<br>
@@ -223,7 +224,7 @@ function configHTML(domain, token) {
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
         <h2>Windows 脚本:</h2>
         <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
-        <pre><code class="language-bash">update.bat ip.txt</code></pre>
+        <pre><code class="language-batch">update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
         <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
         <h2>在线文档查询:</h2>
@@ -253,3 +254,4 @@ function configHTML(domain, token) {
 </html>
     `;
 }
+  
