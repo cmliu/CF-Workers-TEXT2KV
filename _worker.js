@@ -188,18 +188,18 @@ function configHTML(domain, token) {
             /* Flexbox layout for h2 and button */
         .flex-row { display: flex; justify-content: space-between; align-items: center; }
         .download-button {
-    padding: 5px 10px; /* 调整按钮的内边距，改变大小 */
-    background-color: darkgray; /* 设置按钮背景颜色 */
-    color: white; /* 设置按钮文本颜色 */
-    border: none; /* 去掉边框 */
-    border-radius: 5px; /* 设置圆角 */
-    cursor: pointer; /* 设置鼠标悬停时的光标样式 */
-    transition: background-color 0.3s; /* 添加背景颜色的过渡效果 */
-}
-
-.download-button:hover {
-    background-color: #45a049; /* 鼠标悬停时的背景颜色 */
-}
+            padding: 5px 10px; /* 调整按钮的内边距，改变大小 */
+            background-color: darkgray !important; /* 设置按钮背景颜色 */
+            color: white; /* 设置按钮文本颜色 */
+            border: none; /* 去掉边框 */
+            border-radius: 5px; /* 设置圆角 */
+            cursor: pointer; /* 设置鼠标悬停时的光标样式 */
+            transition: background-color 0.3s; /* 添加背景颜色的过渡效果 */
+        }
+        
+        .download-button:hover {
+            background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+        }
 
         /* Light theme */
         body.light { background-color: #f0f0f0; color: #333; }
