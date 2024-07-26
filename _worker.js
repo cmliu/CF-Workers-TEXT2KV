@@ -177,8 +177,7 @@ function configHTML(domain, token) {
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 10px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; }
-        pre { padding: 0px; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
-        pre code { background: none; padding: 0; border: none; border-radius:15px;}
+        pre code { background: none; padding: 0; border: none; border-radius:5px;}
         button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 25px); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
@@ -187,7 +186,7 @@ function configHTML(domain, token) {
         /* Light theme */
         body.light { background-color: #f0f0f0; color: #333; }
         h1.light { color: #444; }
-        pre.light { background-color: #fff; border: 1px solid #ddd; }
+        code.light { background-color: #fff; border: 1px solid #ddd; }
         button.light { background-color: #007bff; color: #fff; }
         input[type="text"].light { border: 1px solid #ddd; }
         .container.light { background-color: #fff; }
@@ -195,7 +194,7 @@ function configHTML(domain, token) {
         /* Dark theme */
         body.dark { background-color: #1e1e1e; color: #c9d1d9; }
         h1.dark { color: #c9d1d9; }
-        pre.dark { background-color: #2d2d2d; border: 1px solid #444; }
+        code.dark { background-color: #2d2d2d; border: 1px solid #444; }
         button.dark { background-color: #1f6feb; color: #c9d1d9; }
         input[type="text"].dark { border: 1px solid #444; }
         .container.dark { background-color: #2d2d2d; }
@@ -215,16 +214,16 @@ function configHTML(domain, token) {
 </head>
 <body>
 <h1>TEXT2KV 配置信息</h1>
+        
+    <div class="container">
         <p>
             <strong>服务域名:</strong> ${domain}<br>
             <strong>TOKEN:</strong> ${token}<br>
         </p>
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
-    <div class="container">
-        
         <h2>Windows 脚本:</h2>
         <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
-        <pre><code class="language-dos">update.bat ip.txt</code></pre>
+        <pre><code class="language-bat">update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
         <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
         <h2>在线文档查询:</h2>
