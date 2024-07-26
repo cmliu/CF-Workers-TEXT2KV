@@ -175,14 +175,14 @@ function configHTML(domain, token) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF-Workers-TEXT2KV 配置信息</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 10px; max-width: 800px; margin: 0 auto; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; }
         pre { padding: 15px; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
-        code { background:transform}
+        pre code { background: none; padding: 0; border: none; }
         button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 25px); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
-        .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .container { padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
 
         /* Light theme */
         body.light { background-color: #f0f0f0; color: #333; }
