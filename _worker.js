@@ -185,7 +185,6 @@ function configHTML(domain, token) {
         cursor: pointer; 
         padding: 10px 10px; 
         margin-top: 0px; 
-        margin-left: 5px;
         border: none; 
         border-radius: 5px; }
         button:hover { opacity: 0.9; }
