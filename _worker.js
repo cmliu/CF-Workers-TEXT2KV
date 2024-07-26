@@ -262,8 +262,8 @@ function configHTML(domain, token) {
         <pre><code>update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
         <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
-        <div class="flex-row">
         <h2>在线文档查询:</h2>
+        <div class="flex-row">
         <input type="text" id="keyword" placeholder="请输入要查询的文档">
         <button onclick="viewDocument()">查看文档内容</button>
         <button onclick="copyDocumentURL()">复制文档地址</button>
