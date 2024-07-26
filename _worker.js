@@ -193,7 +193,7 @@ function configHTML(domain, token) {
         input[type="text"] { 
             padding: 9px 10px;
             border-radius: 5px;
-            flex-grow: 1;
+            flex-grow: 0;
         }
         .tips {
             color:grey;
