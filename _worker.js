@@ -175,19 +175,23 @@ function configHTML(domain, token) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF-Workers-TEXT2KV 配置信息</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f0f0; color: #333; padding: 10px; max-width: 800px; margin: 0 auto; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f0f0; color: #333; padding: 20px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; color: #444; }
         pre { background-color: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
         button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; background-color: #007bff; color: #fff; }
         button:hover { background-color: #0056b3; }
         input[type="text"] { width: calc(100% - 25px); padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
-        .container { background-color: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .container { background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
     </style>
+    <!-- 引入 Highlight.js 的 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <!-- 引入 Highlight.js 的 JavaScript 文件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
 <body>
-<h1>TEXT2KV 配置信息</h1>
     <div class="container">
-        
+        <h1>TEXT2KV 配置信息</h1>
         <p>
             <strong>服务域名:</strong> ${domain}<br>
             <strong>TOKEN:</strong> ${token}<br>
@@ -195,10 +199,9 @@ function configHTML(domain, token) {
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
         <h2>Windows 脚本:</h2>
         <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
-        <pre><code>update.bat ip.txt</code></pre>
+        <pre><code class="language-batch">update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
-        <pre><code>curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
-               <pre><code>./update.sh ip.txt</code></pre>
+        <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
         <h2>在线文档查询:</h2>
         <input type="text" id="keyword" placeholder="请输入要查询的文档">
         <button onclick="viewDocument()">查看文档内容</button>
