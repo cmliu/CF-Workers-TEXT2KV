@@ -145,7 +145,7 @@ function configHTML(域名, token) {
     </style>
 </head>
 <body>
-    <h1>CF-Workers-TEXT2KV 配置信息</h1>
+    <h1>TEXT2KV 配置信息</h1>
     <p>
         服务域名: ${域名}<br>
         token: ${token}<br>
