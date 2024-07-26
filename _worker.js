@@ -184,8 +184,9 @@ function configHTML(domain, token) {
         button { cursor: pointer; padding: 10px 10px; margin-top: 0px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { 
-        width: calc(100%-30em);
-        padding: 10px; border-radius: 5px; 
+            width: calc(100% - 225px);
+            padding: 10px;
+            border-radius: 5px;
         }
         .tips {
             color:grey;
