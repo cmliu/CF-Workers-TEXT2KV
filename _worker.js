@@ -181,7 +181,7 @@ function configHTML(domain, token) {
         h2 { text-align: left; font-size:1.3rem}
         pre,code { padding: 0px; border-radius: 8px; overflow-x: auto; white-space: nowrap; }
         pre code { background: none; padding: 0; border: none; }
-        button { cursor: pointer; padding: 10px 10px; margin-top: 5px; border: none; border-radius: 5px; }
+        button { cursor: pointer; padding: 10px 10px; margin-top: 0px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
