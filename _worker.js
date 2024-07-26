@@ -186,7 +186,7 @@ function configHTML(domain, token) {
         input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
             /* Flexbox layout for h2 and button */
-        .flex-row { display: flex; justify-content: space-between; align-items: center; margin-bottom:10px;}
+        .flex-row { display: flex; justify-content: space-between; align-items: center; margin-bottom:0px !important;}
         .download-button {
             padding: 5px 10px; /* 调整按钮的内边距，改变大小 */
             margin:0 !importan;
