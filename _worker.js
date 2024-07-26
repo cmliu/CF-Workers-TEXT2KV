@@ -185,7 +185,6 @@ function configHTML(domain, token) {
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        .d-flex { display:flex;}
 
         /* Light theme */
         body.light { background-color: #f0f0f0; color: #333; }
@@ -225,10 +224,8 @@ function configHTML(domain, token) {
             <strong>TOKEN:</strong> ${token}<br>
         </p>
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
-        <div class="d-h2">
-        <h2 class="d-flex">Windows 脚本:</h2>
-        <button  class="d-flex";onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
-        <div>
+        <h2>Windows 脚本:</h2>
+        <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
         <pre><code>update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
         <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
