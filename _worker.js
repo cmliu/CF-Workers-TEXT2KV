@@ -185,8 +185,9 @@ function configHTML(domain, token) {
     </style>
 </head>
 <body>
+<h1>TEXT2KV 配置信息</h1>
     <div class="container">
-        <h1>TEXT2KV 配置信息</h1>
+        
         <p>
             <strong>服务域名:</strong> ${domain}<br>
             <strong>TOKEN:</strong> ${token}<br>
