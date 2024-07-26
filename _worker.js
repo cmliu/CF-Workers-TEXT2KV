@@ -182,7 +182,7 @@ function configHTML(domain, token) {
         pre code { background: none; padding: 0; border: none; }
         button { cursor: pointer; padding: 10px 10px; margin-top: 10px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
-        input[type="text"] { width: calc(100% - 15rem); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        input[type="text"] { width: calc(100% - 15em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
 
         /* Light theme */
