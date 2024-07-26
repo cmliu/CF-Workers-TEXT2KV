@@ -203,6 +203,20 @@ function configHTML(domain, token) {
         .container.dark { background-color: #2d2d2d; }
                 /* Flexbox layout for h2 and button */
         .flex-row { display: flex; justify-content: space-between; align-items: center; }
+        .download-button {
+    padding: 10px 20px; /* 调整按钮的内边距，改变大小 */
+    background-color: #4CAF50; /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 5px; /* 设置圆角 */
+    font-size: 16px; /* 设置字体大小 */
+    cursor: pointer; /* 设置鼠标悬停时的光标样式 */
+    transition: background-color 0.3s; /* 添加背景颜色的过渡效果 */
+}
+
+.download-button:hover {
+    background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+}
     </style>
     <!-- 引入 Highlight.js 的 CSS 文件 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/obsidian.min.css">
@@ -226,10 +240,10 @@ function configHTML(domain, token) {
             <strong>TOKEN:</strong> ${token}<br>
         </p>
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
-                <div class="flex-row">
-            <h2>Windows 脚本:</h2>
-            <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
-        </div>
+        <div class="flex-row">
+    <h2>Windows 脚本:</h2>
+    <button class="download-button" onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
+</div>
         <pre><code>update.bat ip.txt</code></pre>
         <h2>Linux 脚本:</h2>
         <pre><code class="language-bash">curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
