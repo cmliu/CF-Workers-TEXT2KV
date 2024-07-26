@@ -184,6 +184,10 @@ function configHTML(domain, token) {
         button { cursor: pointer; padding: 10px 10px; margin-top: 0px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        .tips {
+            color:greay;
+            font-size:1em;
+        }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
             /* Flexbox layout for h2 and button */
         .flex-row { 
