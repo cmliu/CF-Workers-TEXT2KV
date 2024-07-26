@@ -180,9 +180,9 @@ function configHTML(domain, token) {
         h1 { text-align: center; }
         pre,code { padding: 0px; border-radius: 8px; overflow-x: auto; white-space: nowrap; }
         pre code { background: none; padding: 0; border: none; }
-        button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; }
+        button { cursor: pointer; padding: 10px 10px; margin-top: 10px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
-        input[type="text"] { width: calc(50% - 25px); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        input[type="text"] { width: calc(40% - 25px); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
 
         /* Light theme */
