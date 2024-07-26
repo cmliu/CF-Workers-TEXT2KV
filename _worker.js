@@ -175,19 +175,42 @@ function configHTML(domain, token) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF-Workers-TEXT2KV 配置信息</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f0f0; color: #333; padding: 20px; max-width: 800px; margin: 0 auto; }
-        h1 { text-align: center; color: #444; }
-        pre { background-color: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
-        button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; background-color: #007bff; color: #fff; }
-        button:hover { background-color: #0056b3; }
-        input[type="text"] { width: calc(100% - 25px); padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
-        .container { background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; }
+        pre { padding: 15px; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
+        button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; }
+        button:hover { opacity: 0.9; }
+        input[type="text"] { width: calc(100% - 25px); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        .container { padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+
+        /* Light theme */
+        body.light { background-color: #f0f0f0; color: #333; }
+        h1.light { color: #444; }
+        pre.light { background-color: #fff; border: 1px solid #ddd; }
+        button.light { background-color: #007bff; color: #fff; }
+        input[type="text"].light { border: 1px solid #ddd; }
+        .container.light { background-color: #fff; }
+
+        /* Dark theme */
+        body.dark { background-color: #1e1e1e; color: #c9d1d9; }
+        h1.dark { color: #c9d1d9; }
+        pre.dark { background-color: #2d2d2d; border: 1px solid #444; }
+        button.dark { background-color: #1f6feb; color: #c9d1d9; }
+        input[type="text"].dark { border: 1px solid #444; }
+        .container.dark { background-color: #2d2d2d; }
     </style>
     <!-- 引入 Highlight.js 的 CSS 文件 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
     <!-- 引入 Highlight.js 的 JavaScript 文件 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.body.classList.add(theme);
+            document.querySelectorAll('h1, pre, button, input[type="text"], .container').forEach(el => el.classList.add(theme));
+        });
+    </script>
 </head>
 <body>
     <div class="container">
