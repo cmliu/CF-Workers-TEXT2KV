@@ -230,6 +230,7 @@ function configHTML(domain, token) {
             align-items: center;
             gap: 5px;
             white-space: nowrap;
+            width:100%;
         }
 
         /* Light theme */
