@@ -178,7 +178,7 @@ function configHTML(domain, token) {
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; }
-        pre { padding: 15px; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
+        pre,code { padding: 0px; border-radius: 5px; overflow-x: auto; white-space: nowrap; }
         pre code { background: none; padding: 0; border: none; }
         button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
@@ -215,8 +215,9 @@ function configHTML(domain, token) {
     </script>
 </head>
 <body>
-    <div class="container">
         <h1>TEXT2KV 配置信息</h1>
+    <div class="container">
+
         <p>
             <strong>服务域名:</strong> ${domain}<br>
             <strong>TOKEN:</strong> ${token}<br>
