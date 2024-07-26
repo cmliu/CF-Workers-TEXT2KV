@@ -185,6 +185,22 @@ function configHTML(domain, token) {
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
         .container { padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+            /* Flexbox layout for h2 and button */
+        .flex-row { display: flex; justify-content: space-between; align-items: center; }
+        .download-button {
+    padding: 5px 10px; /* 调整按钮的内边距，改变大小 */
+    background-color: #4CAF50; /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 5px; /* 设置圆角 */
+    font-size: 8px; /* 设置字体大小 */
+    cursor: pointer; /* 设置鼠标悬停时的光标样式 */
+    transition: background-color 0.3s; /* 添加背景颜色的过渡效果 */
+}
+
+.download-button:hover {
+    background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+}
 
         /* Light theme */
         body.light { background-color: #f0f0f0; color: #333; }
@@ -201,22 +217,6 @@ function configHTML(domain, token) {
         button.dark { background-color: #1f6feb; color: #c9d1d9; }
         input[type="text"].dark { border: 1px solid #444; }
         .container.dark { background-color: #2d2d2d; }
-                /* Flexbox layout for h2 and button */
-        .flex-row { display: flex; justify-content: space-between; align-items: center; }
-        .download-button {
-    padding: 10px 20px; /* 调整按钮的内边距，改变大小 */
-    background-color: #4CAF50; /* 设置按钮背景颜色 */
-    color: white; /* 设置按钮文本颜色 */
-    border: none; /* 去掉边框 */
-    border-radius: 5px; /* 设置圆角 */
-    font-size: 16px; /* 设置字体大小 */
-    cursor: pointer; /* 设置鼠标悬停时的光标样式 */
-    transition: background-color 0.3s; /* 添加背景颜色的过渡效果 */
-}
-
-.download-button:hover {
-    background-color: #45a049; /* 鼠标悬停时的背景颜色 */
-}
     </style>
     <!-- 引入 Highlight.js 的 CSS 文件 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/obsidian.min.css">
