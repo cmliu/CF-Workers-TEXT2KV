@@ -177,7 +177,7 @@ function configHTML(domain, token) {
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 10px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; }
-        code { background: black; padding: 0; border: none; border-radius:5px 15px;}
+        code { background: black; padding: 0 15px; border: none; border-radius:15px;}
         button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
         input[type="text"] { width: calc(100% - 25px); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
