@@ -178,7 +178,7 @@ function configHTML(domain, token) {
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 15px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; }
-        h2 { text-align: left; font-size:1.2rem}
+        h2 { text-align: left; font-size:1.3rem; width:50%}
         pre,code { padding: 0px; border-radius: 8px; overflow-x: auto; white-space: nowrap; }
         pre code { background: none; padding: 0; border: none; }
         button { cursor: pointer; padding: 10px 10px; margin-top: 5px; border: none; border-radius: 5px; }
