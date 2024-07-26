@@ -183,7 +183,9 @@ function configHTML(domain, token) {
         pre code { background: none; padding: 0; border: none; }
         button { cursor: pointer; padding: 10px 10px; margin-top: 0px; border: none; border-radius: 5px; }
         button:hover { opacity: 0.9; }
-        input[type="text"] { width: calc(100% - 19em); padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        input[type="text"] { 
+        padding: 10px; border-radius: 5px; 
+        }
         .tips {
             color:grey;
             font-size:0.8em;
