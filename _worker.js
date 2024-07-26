@@ -24,9 +24,9 @@ export default {
                 case mytoken:
                     return createResponse(configHTML(url.hostname, token), 200, { 'Content-Type': 'text/html; charset=UTF-8' });
                 case "config/update.bat":
-                    return createResponse(下载bat(url.hostname, token), 200, { "Content-Disposition": 'attachment; filename=update.bat', "Content-Type": "text/plain; charset=utf-8" });
+                    return createResponse(generateBatScript(url.hostname, token), 200, { "Content-Disposition": 'attachment; filename=update.bat', "Content-Type": "text/plain; charset=utf-8" });
                 case "config/update.sh":
-                    return createResponse(下载sh(url.hostname, token), 200, { "Content-Disposition": 'attachment; filename=update.sh', "Content-Type": "text/plain; charset=utf-8" });
+                    return createResponse(generateShScript(url.hostname, token), 200, { "Content-Disposition": 'attachment; filename=update.sh', "Content-Type": "text/plain; charset=utf-8" });
                 default:
                     return await handleFileOperation(env.KV, fileName, url, token);
             }
@@ -37,10 +37,18 @@ export default {
     }
 };
 
+/**
+ * 处理文件操作
+ * @param {Object} KV - KV 命名空间实例
+ * @param {String} fileName - 文件名
+ * @param {Object} url - URL 实例
+ * @param {String} token - 认证 token
+ */
 async function handleFileOperation(KV, fileName, url, token) {
     const text = url.searchParams.get('text') || null;
     const b64 = url.searchParams.get('b64') || null;
 
+    // 如果没有传递 text 或 b64 参数，尝试从 KV 存储中获取文件内容
     if (!text && !b64) {
         const value = await KV.get(fileName, { cacheTtl: 60 });
         if (value === null) {
@@ -49,7 +57,8 @@ async function handleFileOperation(KV, fileName, url, token) {
         return createResponse(value);
     }
 
-    let content = text || base64Decode(空格替换加号(b64));
+    // 如果传递了 text 或 b64 参数，将内容写入 KV 存储
+    let content = text || base64Decode(replaceSpacesWithPlus(b64));
     await KV.put(fileName, content);
     const verifiedContent = await KV.get(fileName, { cacheTtl: 60 });
 
@@ -60,6 +69,12 @@ async function handleFileOperation(KV, fileName, url, token) {
     return createResponse(verifiedContent);
 }
 
+/**
+ * 创建 HTTP 响应
+ * @param {String} body - 响应内容
+ * @param {Number} status - HTTP 状态码
+ * @param {Object} additionalHeaders - 额外的响应头部信息
+ */
 function createResponse(body, status = 200, additionalHeaders = {}) {
     const headers = {
         'Content-Type': 'text/plain; charset=utf-8',
@@ -74,6 +89,10 @@ function createResponse(body, status = 200, additionalHeaders = {}) {
     return new Response(body, { status, headers });
 }
 
+/**
+ * 解码 base64 字符串
+ * @param {String} str - base64 字符串
+ */
 function base64Decode(str) {
     try {
         const bytes = new Uint8Array(atob(str).split('').map(c => c.charCodeAt(0)));
@@ -83,17 +102,26 @@ function base64Decode(str) {
     }
 }
 
-function 空格替换加号(str) {
+/**
+ * 将字符串中的空格替换为加号
+ * @param {String} str - 输入字符串
+ */
+function replaceSpacesWithPlus(str) {
     return str.replace(/ /g, '+');
 }
 
-function 下载bat(域名, token) {
+/**
+ * 生成 Windows bat 脚本
+ * @param {String} domain - 域名
+ * @param {String} token - 认证 token
+ */
+function generateBatScript(domain, token) {
     return [
         '@echo off',
         'chcp 65001',
         'setlocal',
         '',
-        `set "DOMAIN=${域名}"`,
+        `set "DOMAIN=${domain}"`,
         `set "TOKEN=${token}"`,
         '',
         'set "FILENAME=%~nx1"',
@@ -111,10 +139,15 @@ function 下载bat(域名, token) {
     ].join('\r\n');
 }
 
-function 下载sh(域名, token) {
+/**
+ * 生成 Linux sh 脚本
+ * @param {String} domain - 域名
+ * @param {String} token - 认证 token
+ */
+function generateShScript(domain, token) {
     return `#!/bin/bash
 export LANG=zh_CN.UTF-8
-DOMAIN="${域名}"
+DOMAIN="${domain}"
 TOKEN="${token}"
 if [ -n "$1" ]; then 
   FILENAME="$1"
@@ -123,12 +156,17 @@ else
   exit 1
 fi
 BASE64_TEXT=$(head -n 65 $FILENAME | base64 -w 0)
-curl -k "https://${域名}/${FILENAME}?token=${token}&b64=${BASE64_TEXT}"
+curl -k "https://${domain}/${FILENAME}?token=${token}&b64=${BASE64_TEXT}"
 echo "更新数据完成"
-`
+`;
 }
 
-function configHTML(域名, token) {
+/**
+ * 生成 HTML 配置页面
+ * @param {String} domain - 域名
+ * @param {String} token - 认证 token
+ */
+function configHTML(domain, token) {
     return `
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -137,40 +175,49 @@ function configHTML(域名, token) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF-Workers-TEXT2KV 配置信息</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; }
-        h1 { text-align: center; color: #333; }
-        pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
-        button { cursor: pointer; padding: 5px 10px; }
-        input[type="text"] { width: 200px; padding: 5px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f0f0; color: #333; padding: 20px; max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; color: #444; }
+        pre { background-color: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; background-color: #007bff; color: #fff; }
+        button:hover { background-color: #0056b3; }
+        input[type="text"] { width: calc(100% - 25px); padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
+        .container { background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
 <body>
-    <h1>TEXT2KV 配置信息</h1>
-    <p>
-        <strong>服务域名:</strong> ${域名}<br>
-        <strong>TOKEN:</strong>   ${token}<br>
-    </p>
-    <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
-    <h2>Windows 脚本:</h2>
-    <button onclick="window.open('https://${域名}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
-    <pre><code>update.bat ip.txt</code></pre>
-    <h2>Linux 脚本:</h2>
-    <pre><code>curl "https://${域名}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
-    <pre><code>./update.sh ip.txt</code></pre>
-    <h2>在线文档查询:</h2>
-    <input type="text" id="keyword" placeholder="请输入要查询的文档">
-    <button onclick="viewDocument()">查看文档内容</button>
-    <button onclick="copyDocumentURL()">复制文档地址</button>
-
+    <div class="container">
+        <h1>TEXT2KV 配置信息</h1>
+        <p>
+            <strong>服务域名:</strong> ${domain}<br>
+            <strong>TOKEN:</strong> ${token}<br>
+        </p>
+        <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
+        <h2>Windows 脚本:</h2>
+        <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
+        <pre><code>update.bat ip.txt</code></pre>
+        <h2>Linux 脚本:</h2>
+        <pre><code>curl "https://${domain}/config/update.sh?token=${token}&t=$(date +%s%N)" -o update.sh && chmod +x update.sh</code></pre>
+               <pre><code>./update.sh ip.txt</code></pre>
+        <h2>在线文档查询:</h2>
+        <input type="text" id="keyword" placeholder="请输入要查询的文档">
+        <button onclick="viewDocument()">查看文档内容</button>
+        <button onclick="copyDocumentURL()">复制文档地址</button>
+    </div>
     <script>
+        /**
+         * 查看文档内容
+         */
         function viewDocument() {
             const keyword = document.getElementById('keyword').value;
-            window.open('https://${域名}/' + keyword + '?token=${token}&t=' + Date.now(), '_blank');
+            window.open('https://${domain}/' + keyword + '?token=${token}&t=' + Date.now(), '_blank');
         }
 
+        /**
+         * 复制文档地址到剪贴板
+         */
         function copyDocumentURL() {
             const keyword = document.getElementById('keyword').value;
-            const url = 'https://${域名}/' + keyword + '?token=${token}&t=' + Date.now();
+            const url = 'https://${domain}/' + keyword + '?token=${token}&t=' + Date.now();
             navigator.clipboard.writeText(url).then(() => alert('文档地址已复制到剪贴板'));
         }
     </script>
