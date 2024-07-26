@@ -214,13 +214,14 @@ function configHTML(domain, token) {
     </script>
 </head>
 <body>
-    <div class="container">
-        <h1>TEXT2KV 配置信息</h1>
+<h1>TEXT2KV 配置信息</h1>
         <p>
             <strong>服务域名:</strong> ${domain}<br>
             <strong>TOKEN:</strong> ${token}<br>
         </p>
         <p><strong>注意!</strong> 因URL长度内容所限，脚本更新方式一次最多更新65行内容</p>
+    <div class="container">
+        
         <h2>Windows 脚本:</h2>
         <button onclick="window.open('https://${domain}/config/update.bat?token=${token}&t=' + Date.now(), '_blank')">点击下载</button>
         <pre><code class="language-dos">update.bat ip.txt</code></pre>
