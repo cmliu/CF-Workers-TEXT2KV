@@ -199,10 +199,10 @@ function configHTML(domain, token) {
         input[type="text"].dark { border: 1px solid #444; }
         .container.dark { background-color: #2d2d2d; }
     </style>
-    <!-- 引入 Highlight.js 的 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <!-- 引入 Highlight.js 的 CSS 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/1c-light.min.css" integrity="sha512-kM8PiTB2J9j9MJxP4pg5Morv1nvatwpY0xsNsHDpHobti6+sdvObgLPhJ7lOIHYUqQmTAUAE+CaTcQXR47XO2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- 引入 Highlight.js 的 JavaScript 文件 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
