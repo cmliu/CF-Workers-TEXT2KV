@@ -175,13 +175,13 @@ function configHTML(domain, token) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF-Workers-TEXT2KV 配置信息</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f0f0; color: #333; padding: 20px; max-width: 800px; margin: 0 auto; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f0f0; color: #333; padding: 10px; max-width: 800px; margin: 0 auto; }
         h1 { text-align: center; color: #444; }
         pre { background-color: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
         button { cursor: pointer; padding: 10px 15px; margin-top: 10px; border: none; border-radius: 5px; background-color: #007bff; color: #fff; }
         button:hover { background-color: #0056b3; }
         input[type="text"] { width: calc(100% - 25px); padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
-        .container { background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .container { background-color: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
 <body>
